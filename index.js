@@ -8,19 +8,20 @@ mongoose.connect(process.env.DB_URL, {useNewUrlParser: true, useUnifiedTopology:
 .then(()=>{
     console.log(`connection to database established`)});
 var bodyParser = require('body-parser')
-const { compare } = require('bcryptjs')
-
-     
     // create application/json parser
 var jsonParser = bodyParser.json()
      
 // create application/x-www-form-urlencoded parser
 var urlencodedParser = bodyParser.urlencoded({ extended: false })
-    
+var cors = require('cors')
 
+app.use(cors())
+var i=1;
 app.use('/api/user',authRoute)
+
 app.post('/test',jsonParser,(req,res) =>{
-    console.log("Hello")
-    res.send(req.body)
+    console.log("IN TEST" + i)
+    i+=1
+    res.send("Hello")
 })
-app.listen(3000,()=> console.log('Running on Port 3000'))
+app.listen(4000,()=> console.log('Running on Port 3000'))

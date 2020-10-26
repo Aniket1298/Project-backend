@@ -16,7 +16,6 @@ router.post('/register',jsonParser,async (req,res) => {
     console.log("HELLO")
     console.log(req.body)
     const {error} =registerValidation(req.body)
-    console.log(error)
     if (error){return res.status(400).send(error.details[0].message)}
     const salt = await bcrypt.genSalt(10)
     const hashPassword = await bcrypt.hash(req.body.password,salt)
