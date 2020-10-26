@@ -24,4 +24,5 @@ const userSchema = new mongoose.Schema({
     }
 })
 var User = mongoose.model('User', userSchema);
+//user = new User({"name":'dfadfad',"email":'sdf@sf.com','password':"dfsdfsdfds"})
 module.exports = User;

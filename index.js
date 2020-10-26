@@ -8,8 +8,8 @@ mongoose.connect(process.env.DB_URL, {useNewUrlParser: true, useUnifiedTopology:
 .then(()=>{
     console.log(`connection to database established`)});
 var bodyParser = require('body-parser')
- 
-    
+const { compare } = require('bcryptjs')
+
      
     // create application/json parser
 var jsonParser = bodyParser.json()
