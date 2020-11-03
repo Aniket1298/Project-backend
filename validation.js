@@ -7,7 +7,7 @@ function registerValidation(data){
         email:Joi.string().required().email(),
         password:Joi.string().required().min(8)
     })
-    return   schema.validate(data)
+    return  schema.validate(data)
 }
 
 function loginValidation(data){

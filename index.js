@@ -20,8 +20,7 @@ var i=1;
 app.use('/api/user',authRoute)
 
 app.post('/test',jsonParser,(req,res) =>{
-    console.log("IN TEST" + i)
-    i+=1
-    res.send("Hello")
+  
+    res.status(200).send("Hello")
 })
 app.listen(4000,()=> console.log('Running on Port 3000'))
