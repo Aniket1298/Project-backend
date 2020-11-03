@@ -10,7 +10,6 @@ router.get('/test',(req,res) =>{
 var jsonParser = bodyParser.json()
 console.log(User)
 router.post('/register',jsonParser,async (req,res) => {
-    
     const {error}=registerValidation(req.body)
     if (error){
         console.log(error.details[0].message)
@@ -39,9 +38,13 @@ router.post('/login',jsonParser,async (req,res) => {
     const user = await User.findOne({email:req.body.email})
     if (!user) return res.send("Invalid Credentials")
     const validPassword = bcrypt.compare(req.body.password,user.password)
-    const token = jwt.sign({_id:user._id},process.env.SECRET_KEY)
+    const token = jwt.sign({user:user},process.env.SECRET_KEY)
+    
     res.cookie('token', token, { httpOnly: true });
     res.user=jwt.verify(token,process.env.SECRET_KEY)
+    console.log(jwt.verify(token,process.env.SECRET_KEY).user.name)
+    console.log(jwt.verify("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyIjp7Il9pZCI6IjVmYTBlMDAzMjIxZmQ3MThlZjNjM2VjMyIsIm5hbWUiOiJ0ZW1wb3JhcnkiLCJlbWFpbCI6InRlbXBvcmFyeUBnbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYSQxMCQ0aEoyQ2VZZHZsUlVFenJ1Zmw1cDdlLjRPcUxmYjFZcHZYd2IvaDFwWTlycDZuM3FQUHdVaSIsImRhdGUiOiIyMDIwLTExLTAzVDA0OjQzOjQ3Ljc3NFoiLCJfX3YiOjB9LCJpYXQiOjE2MDQ0MTM1MDN9.8XWFTE6EAKU8EcrXLOMjdxbeTKfi6O2kUkwrd7psn0s"
+,'ABC123'))
     return res.status(200).send({'token':token})
     //res.header('auth-token',token).send({"Token":token})
 })

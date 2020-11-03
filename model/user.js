@@ -5,7 +5,6 @@ const userSchema = new mongoose.Schema({
         required:true,
     },
     email:{
-
         type:String,
         unique:true,
         required:true,
@@ -24,5 +23,4 @@ const userSchema = new mongoose.Schema({
     }
 })
 var User = mongoose.model('User', userSchema);
-//user = new User({"name":'dfadfad',"email":'sdf@sf.com','password':"dfsdfsdfds"})
 module.exports = User;
