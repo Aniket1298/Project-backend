@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 var reportSchema = new mongoose.Schema({ 
     name: {type:String,required:true},
+    patient_id:{type:String,required:true},
     user: [{ type: Schema.Types.ObjectId, ref: 'User' }],
     doc: 
     { 
